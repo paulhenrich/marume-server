@@ -32,7 +32,14 @@
    "http://33.media.tumblr.com/tumblr_lwxwodpayS1qg20muo1_500.gif"
    "http://38.media.tumblr.com/tumblr_lwxo3tYWiv1qg20muo1_500.gif"
    "http://media.tumblr.com/tumblr_ldz535p7cp1qb012q.gif"
-   "http://33.media.tumblr.com/tumblr_lvwjcsxwrJ1qbhtrto1_500.gif"])
+   "http://33.media.tumblr.com/tumblr_lvwjcsxwrJ1qbhtrto1_500.gif"
+   "http://38.media.tumblr.com/tumblr_lkqj81GPJK1qg20muo1_500.gif"
+   "http://33.media.tumblr.com/tumblr_lkhlebW6vO1qg20muo1_500.gif"
+   "http://33.media.tumblr.com/tumblr_lkqj126Avc1qg20muo1_500.gif"
+   "http://38.media.tumblr.com/tumblr_lkeii7PqUt1qg20muo1_500.gif"
+   "http://38.media.tumblr.com/tumblr_lk0ubikWET1qg20muo1_500.gif"
+   "http://31.media.tumblr.com/tumblr_lji0fdeMGM1qg20muo1_500.gif"
+   "http://media.giphy.com/media/aj2CkK05IbaFy/giphy.gif"])
 
 (defn random-maru []
   (rand-nth maru-gifs))
