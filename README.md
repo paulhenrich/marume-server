@@ -16,8 +16,8 @@ Add Maru to your hubot: [maru me](https://github.com/paulhenrich/marume-bot)
 ##Contribute
 1. Fork
 2. add maru gifs, 1 per line, to `resources/gifs.txt`
-3. Open pull request
-
+3. `lein test`
+4. Open pull request
 
 ---
 
