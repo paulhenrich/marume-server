@@ -7,13 +7,19 @@
             [ring.middleware.session :as session]
             [ring.middleware.session.cookie :as cookie]
             [ring.adapter.jetty :as jetty]
-            [environ.core :refer [env]]))
+            [environ.core :refer [env]]
+            [markdown.core :as md]))
 
 
 (def maru-gifs
   (-> "resources/gifs.txt"
     (slurp)
     (clojure.string/split-lines)))
+
+(def home-page
+  (-> "README.md"
+    (slurp)
+    (md/md-to-html-string)))
 
 (defn random-maru []
   (rand-nth maru-gifs))
@@ -22,11 +28,15 @@
   (GET "/" []
        {:status 200
         :headers {"Content-Type" "text/html"}
-        :body "<img src=\"random.gif\">"})
+        :body home-page})
   (GET "/random.gif" []
        {:status 302
         :headers {"Location" (random-maru)}
         :body nil})
+  (GET "/count" []
+       {:status 200
+        :headers {"Content-Type" "text/plain"}
+        :body (str (count maru-gifs))})
   (ANY "*" []
        (route/not-found (slurp (io/resource "404.html")))))
 
