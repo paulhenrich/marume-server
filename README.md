@@ -19,4 +19,6 @@ Add Maru to your chat bot: [maru me](https://github.com/paulhenrich/marume-bot)
 
 ---
 
-A [Heroku](http://www.heroku.com) web app using Compojure.
+A Heroku web app using Compojure.
+
+Thanks to this [maru tumblr](http://meowmeowmaru.tumblr.com/) for most of the initial urls.
