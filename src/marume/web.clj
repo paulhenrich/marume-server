@@ -6,7 +6,7 @@
             [ring.middleware.stacktrace :as trace]
             [ring.middleware.session :as session]
             [ring.middleware.session.cookie :as cookie]
-            [ring.adapter.jetty :as jetty]
+            [org.httpkit.server :refer [run-server]]
             [environ.core :refer [env]]
             [markdown.core :as md]))
 
@@ -56,7 +56,7 @@
 
 (defn -main [& [port]]
   (let [port (Integer. (or port (env :port) 5000))]
-    (jetty/run-jetty (wrap-app #'app) {:port port :join? false})))
+    (run-server (wrap-app #'app) {:port port :join? false})))
 
 ;; For interactive development:
 ;; (.stop server)
