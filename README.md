@@ -6,7 +6,7 @@ Just `<img src="http://marume.herokuapp.com/random.gif">` anywhere you need a ma
 
 ![maru](http://marume.herokuapp.com/random.gif)
 
-Browsers rudely cache 302 redirects on image tags, so you may need to put a cache busting query string on the end if you want more than one maru.
+Browsers rudely cache 302 redirects on image tags, so you may need to append a query string (e.g. /random.gif?unique-token) if you want more than one random maru on a page.
 
 ## Hubot
 Add Maru to your chat bot: [maru me](https://github.com/paulhenrich/marume-bot)
