@@ -1,12 +1,14 @@
 (ns marume.web-test
   (:require [clojure.test :refer :all]
+            [ring.mock.request :as mock]
             [marume.web :refer :all]))
 
 (defn gif? [s]
   (string? (re-find #"http.*\.gif" s)))
 
-(deftest get-a-maru
-  (is (gif? (random-maru))))
-
 (deftest all-marus
   (is (every? gif? maru-gifs)))
+
+(deftest routes
+  (is (= 200 (:status (app (mock/request :get "/")))))
+  (is (= 302 (:status (app (mock/request :get "/random.gif"))))))

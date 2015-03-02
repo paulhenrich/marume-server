@@ -8,6 +8,7 @@
                  [javax.servlet/servlet-api "2.5"]
                  [http-kit "2.1.16"]
                  [markdown-clj "0.9.62"]
+                 [ring/ring-mock "0.2.0"]
                  [ring/ring-devel "1.3.2"]
                  [environ "0.5.0"]]
   :min-lein-version "2.0.0"
