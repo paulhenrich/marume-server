@@ -17,26 +17,45 @@
     (clojure.string/split-lines)))
 
 (def home-page
-  (-> "README.md"
-    (slurp)
-    (md/md-to-html-string)))
+  {:status 200
+   :headers {"Content-Type" "text/html"}
+   :body (-> "README.md"
+             (slurp)
+             (md/md-to-html-string))})
 
 (defn random-maru []
   (rand-nth maru-gifs))
 
+(defn random-marus [num]
+  "Return a collection of up to 10 marus"
+  (let [num (Integer/parseInt num)
+        n (if (<= num 10) num 10)
+        gifs (->> maru-gifs shuffle (take n))
+        body (str "<html>"
+                  (clojure.string/join " " (map #(str "<img src=\"" % "\"><br>") gifs))
+                  "</html>")]
+    body
+    ))
+
+(defn redirect-to [url]
+  {:status 302
+   :headers {"Location" url}
+   :body nil})
+
 (defroutes app
   (GET "/" []
-       {:status 200
-        :headers {"Content-Type" "text/html"}
-        :body home-page})
+       home-page)
   (GET "/random.gif" []
-       {:status 302
-        :headers {"Location" (random-maru)}
-        :body nil})
+       (redirect-to (random-maru)))
+  (GET ["/:id.gif" :id #"[0-9]+"] [id]
+       (try
+         (redirect-to (->> id (Integer/parseInt) dec (nth maru-gifs)))
+         (catch Exception _
+           (route/not-found "No such maru"))))
+  (GET ["/random/:count.html" :count #"[0-9]+"] [count]
+       (random-marus count))
   (GET "/count" []
-       {:status 200
-        :headers {"Content-Type" "text/plain"}
-        :body (str (count maru-gifs))})
+       (str (count maru-gifs)))
   (ANY "*" []
        (route/not-found (slurp (io/resource "404.html")))))
 
