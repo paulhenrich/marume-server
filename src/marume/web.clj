@@ -32,7 +32,7 @@
         n (if (<= num 10) num 10)
         gifs (->> maru-gifs shuffle (take n))
         body (str "<html>"
-                  (clojure.string/join " " (map #(str "<img src=\"" % "\"><br>") gifs))
+                  (clojure.string/join " " (map #(str "<img src=\"" % "\"/>") gifs))
                   "</html>")]
     body
     ))
