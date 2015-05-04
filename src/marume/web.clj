@@ -30,12 +30,11 @@
   "Return a collection of up to 10 marus"
   (let [num (Integer/parseInt num)
         n (if (<= num 10) num 10)
-        gifs (->> maru-gifs shuffle (take n))
+        selected (take n (shuffle (range 1 (inc (count maru-gifs)))))
         body (str "<html>"
-                  (clojure.string/join " " (map #(str "<img src=\"" % "\"/>") gifs))
+                  (clojure.string/join " " (map #(str "<img src=\"/" % ".gif\"/>") selected))
                   "</html>")]
-    body
-    ))
+    body))
 
 (defn redirect-to [code url]
   {:status code
