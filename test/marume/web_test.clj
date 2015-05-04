@@ -12,5 +12,5 @@
 (deftest routes
   (is (= 200 (:status (app (mock/request :get "/")))))
   (is (= 200 (:status (app (mock/request :get "/random/5.html")))))
-  (is (= 302 (:status (app (mock/request :get "/1.gif")))))
+  (is (= 301 (:status (app (mock/request :get "/1.gif")))))
   (is (= 302 (:status (app (mock/request :get "/random.gif"))))))

@@ -37,19 +37,22 @@
     body
     ))
 
-(defn redirect-to [url]
-  {:status 302
+(defn redirect-to [code url]
+  {:status code
    :headers {"Location" url}
    :body nil})
+
+(def r301 (partial redirect-to 301))
+(def r302 (partial redirect-to 302))
 
 (defroutes app
   (GET "/" []
        home-page)
   (GET "/random.gif" []
-       (redirect-to (random-maru)))
+       (r302 (random-maru)))
   (GET ["/:id.gif" :id #"[0-9]+"] [id]
        (try
-         (redirect-to (->> id (Integer/parseInt) dec (nth maru-gifs)))
+         (r301 (->> id (Integer/parseInt) dec (nth maru-gifs)))
          (catch Exception _
            (route/not-found "No such maru"))))
   (GET ["/random/:count.html" :count #"[0-9]+"] [count]
