@@ -10,7 +10,8 @@
                  [markdown-clj "0.9.62"]
                  [ring/ring-mock "0.2.0"]
                  [ring/ring-devel "1.3.2"]
-                 [environ "0.5.0"]]
+                 [environ "0.5.0"]
+                 [hiccup "1.0.5"]]
   :min-lein-version "2.0.0"
   :plugins [[environ/environ.lein "0.2.1"]]
   :hooks [environ.leiningen.hooks]

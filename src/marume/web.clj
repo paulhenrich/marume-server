@@ -8,6 +8,7 @@
             [ring.middleware.session.cookie :as cookie]
             [org.httpkit.server :refer [run-server]]
             [environ.core :refer [env]]
+            [hiccup.core :refer :all]
             [markdown.core :as md]))
 
 
@@ -26,14 +27,13 @@
 (defn random-maru []
   (rand-nth maru-gifs))
 
-(defn random-marus [num]
+(defn random-marus [num request]
   "Return a collection of up to 10 marus"
   (let [num (Integer/parseInt num)
         n (if (<= num 10) num 10)
         selected (take n (shuffle (range 1 (inc (count maru-gifs)))))
-        body (str "<html>"
-                  (clojure.string/join " " (map #(str "<img src=\"/" % ".gif\"/>") selected))
-                  "</html>")]
+        body (html
+              [:body (map #(html [:img {:src (str "http://marume.herokuapp.com/" % ".gif")}]) selected)])]
     body))
 
 (defn redirect-to [code url]
@@ -54,7 +54,7 @@
          (r301 (->> id (Integer/parseInt) dec (nth maru-gifs)))
          (catch Exception _
            (route/not-found "No such maru"))))
-  (GET ["/random/:count.html" :count #"[0-9]+"] [count]
+  (GET ["/random/:count.html" :count #"[0-9]+"] [count :as request]
        (random-marus count))
   (GET "/count" []
        (str (count maru-gifs)))
