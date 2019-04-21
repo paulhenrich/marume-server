@@ -11,7 +11,7 @@ Browsers rudely cache 302 redirects on image tags, so you may need to append a q
 ## Hubot
 Add Maru to your chat bot: [maru me](https://github.com/paulhenrich/marume-bot)
 
-##Contribute
+## Contribute
 1. Fork [this repository](https://github.com/paulhenrich/marume-server)
 2. add maru gifs, 1 per line, to `resources/gifs.txt`
 3. `lein test`
